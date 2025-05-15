@@ -11,7 +11,7 @@ public class UserInterface {
         DealershipFileManager fileManager = new DealershipFileManager();
         dealership = fileManager.getDealership();
         System.out.println(dealership);
-    }
+
     Scanner scantron = new Scanner(System.in);
 
     boolean running = true;
@@ -48,11 +48,14 @@ public class UserInterface {
                 processGetByAllVehicles();
                 break;
 
-            case "8":
+            case "8" :
+                processAddVehicleRequest();
+
+            case "9":
                 processRemoveVehicleRequest();
                 break;
 
-            case "9":
+            case "10":
                 System.out.println("Exiting Program...");
                 running = false;
                 break;
@@ -78,7 +81,15 @@ public class UserInterface {
         System.out.println("9. Exit");
 
     }
+
+    private void displayVehicles(List<Vehicle> vehicles) {
+        if (vehicles == null || vehicles.isEmpty());
+        System.out.println("No Vehicles Found.");
+        return;
+    }
 public void proccessGetByPrice() {
+
+
     Scanner scantron = new Scanner(System.in);
     try {
         System.out.println("Enter minimum price: ");
@@ -89,8 +100,100 @@ public void proccessGetByPrice() {
 
         List<Vehicle> results = proccessGetByPrice(min, max);
         displayVehicles(results);
-    }
-    catch (NumberFormatException e) {
+    } catch (NumberFormatException e) {
         System.out.println("Invalid selection.");
     }
+}
+public void proccessGetByMakeModel() {
+        Scanner scantron = new Scanner(System.in);
+
+    System.out.println("Enter vehicle make: ");
+    String make = scantron.nextLine();
+
+    System.out.println("Enter vehicle model: ");
+    String model = scantron.nextLine();
+
+    List<Vehicle> results = dealership.getVehiclesByMakeModel(make, model);
+    displayVehicles(results);
+}
+
+public void proccessGetByYear() {
+   Scanner scantron = new Scanner(System.in);
+   try {
+       System.out.println("Enter minimum year: ");
+       int minYear = Integer.parseInt(scantron.nextLine);
+
+       System.out.println("Enter maximun year: ");
+       int maxYear = Integer.parseInt(scantron.nextLine);
+
+       List<Vehicle> results = dealership.getVehiclesByYear(minYear, maxYear);
+       displayVehicles(results);
+   } catch (NumberFormatException e) {
+       System.out.println("Invalid selection.");
+   }
+}
+public void processGetByColor() {
+        Scanner scantron = new Scanner(System.in);
+
+    System.out.println("Enter vehicle color: ");
+    String color = scantron.nextLine();
+
+    List<Vehicle> results = dealership.getVehiclesByColor(color);
+    displayVehicles(results);
+}
+public void processGetByVehicleType() {
+        Scanner scantron = new Scanner(System.in);
+
+    System.out.println("Enter vehicle type: ");
+    String vehicleType = scantron.nextLine();
+
+    List<Vehicle> results = dealership.getVehiclesByType(vehicleType);
+    displayVehicles(results);
+}
+public void processAddVehicleRequest() {
+        Scanner scantron = new Scanner(System.in);
+
+    try {
+        System.out.println("Enter VIN number: ");
+        int vin = Integer.parseInt(scantron.nextLine();
+
+        System.out.println("Enter vehicle year: ");
+        int year = Integer.parseInt(scantron.nextLine);
+
+        System.out.println("Enter vehicle make: ");
+        String make = scantron.nextLine();
+
+        System.out.println("Enter vehicle model: ");
+        String model = scantron.nextLine();
+
+        System.out.println("Enter vehicle type: ");
+        String vehicleType = scantron.nextLine();
+
+        System.out.println("Enter mileage: ");
+        int mileage = Integer.parseInt(scantron.nextLine);
+
+        System.out.println("Enter color: ");
+        String color = scantron.nextLine();
+
+        System.out.println("Enter price: ");
+        double price = Double.parseDouble(scantron.nextLine);
+
+    } catch (NumberFormatException e) {
+        System.out.println("Invalid entry. Please try again.");
+    }
+
+    public void processRemoveVehicleRequest() {
+        Scanner scantron = new Scanner(System.in);
+
+        System.out.println("Enter VIN number to remove vehicle: ");
+        try {
+            int removeVehicle = Integer.parseInt(scantron.nextLine();
+
+            List
+
+
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid entry. Please try again.");
+        }
+}
 }
