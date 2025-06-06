@@ -1,4 +1,6 @@
-package com.pluralsight;
+package data;
+
+import model.Dealership;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

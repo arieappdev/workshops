@@ -1,5 +1,8 @@
-package com.pluralsight;
+package ui;
 
+import data.DealershipFileManager;
+import model.Dealership;
+import model.Vehicle;
 
 import java.util.List;
 import java.util.Scanner;
@@ -7,65 +10,65 @@ import java.util.Scanner;
 public class UserInterface {
     Dealership dealership;
 
-    public void display(){
+    public void display() {
         DealershipFileManager fileManager = new DealershipFileManager();
         dealership = fileManager.getDealership();
         System.out.println(dealership);
 
-    Scanner scantron = new Scanner(System.in);
+        Scanner scantron = new Scanner(System.in);
 
-    boolean running = true;
-    while (running) {
-        System.out.println("Welcome! Please choose your option below: ");
-        String choice = scantron.nextLine();
+        boolean running = true;
+        while (running) {
+            System.out.println("Welcome! Please choose your option below: ");
+            String choice = scantron.nextLine();
 
-        switch (choice) {
-            case "1":
-                proccessGetByPrice();
-                break;
+            switch (choice) {
+                case "1":
+                    proccessGetByPrice();
+                    break;
 
-            case "2":
-                proccessGetByMakeModel();
-                break;
+                case "2":
+                    proccessGetByMakeModel();
+                    break;
 
-            case "3":
-                proccessGetByYear();
-                break;
+                case "3":
+                    proccessGetByYear();
+                    break;
 
-            case "4":
-                processGetByColor();
-                break;
+                case "4":
+                    processGetByColor();
+                    break;
 
-            case "5":
-                processGetByMileage();
-                break;
+                case "5":
+                    processGetByMileage();
+                    break;
 
-            case "6":
-                processGetByVehicleType();
-                break;
+                case "6":
+                    processGetByVehicleType();
+                    break;
 
-            case "7":
-                processGetByAllVehicles();
-                break;
+                case "7":
+                    processGetByAllVehicles();
+                    break;
 
-            case "8" :
-                processAddVehicleRequest();
+                case "8":
+                    processAddVehicleRequest();
 
-            case "9":
-                processRemoveVehicleRequest();
-                break;
+                case "9":
+                    processRemoveVehicleRequest();
+                    break;
 
-            case "10":
-                System.out.println("Exiting Program...");
-                running = false;
-                break;
+                case "10":
+                    System.out.println("Exiting Program...");
+                    running = false;
+                    break;
 
-            default:
-                System.out.println("Invalid inquiry try again");
+                default:
+                    System.out.println("Invalid inquiry try again");
+            }
         }
-    }
 
-    scantron.close();
+        scantron.close();
     }
 
     private void displayMenu() {
@@ -83,39 +86,44 @@ public class UserInterface {
     }
 
     private void displayVehicles(List<Vehicle> vehicles) {
-        if (vehicles == null || vehicles.isEmpty());
+        if (vehicles == null || vehicles.isEmpty()) ;
         System.out.println("No Vehicles Found.");
         return;
     }
-public void proccessGetByPrice() {
 
+    public void proccessGetByPrice() {
 
-    Scanner scantron = new Scanner(System.in);
-    try {
-        System.out.println("Enter minimum price: ");
-        double min = Double.parseDouble(scantron.nextLine);
-
-        System.out.println("Enter maximum price: ");
-        double max = Double.parseDouble(scantron.nextLine);
-
-        List<Vehicle> results = proccessGetByPrice(min, max);
-        displayVehicles(results);
-    } catch (NumberFormatException e) {
-        System.out.println("Invalid selection.");
-    }
-}
-public void proccessGetByMakeModel() {
         Scanner scantron = new Scanner(System.in);
 
-    System.out.println("Enter vehicle make: ");
-    String make = scantron.nextLine();
+        try {
+            System.out.println("Enter minimum price: ");
+            double min = Double.parseDouble(scantron.nextLine);
 
-    System.out.println("Enter vehicle model: ");
-    String model = scantron.nextLine();
+            System.out.println("Enter maximum price: ");
+            double max = Double.parseDouble(scantron.nextLine);
 
-    List<Vehicle> results = dealership.getVehiclesByMakeModel(make, model);
-    displayVehicles(results);
-}
+            List<Vehicle> results = proccessGetByPrice(min, max);
+            displayVehicles(results);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid selection.");
+        }
+        scantron.close();
+    }
+
+    public void proccessGetByMakeModel() {
+        Scanner scantron = new Scanner(System.in);
+
+        System.out.println("Enter vehicle make: ");
+        String make = scantron.nextLine();
+
+        System.out.println("Enter vehicle model: ");
+        String model = scantron.nextLine();
+
+        List<Vehicle> results = dealership.getVehiclesByMakeModel(make, model);
+        displayVehicles(results);
+
+        scantron.close();
+    }
 
 public void proccessGetByYear() {
    Scanner scantron = new Scanner(System.in);
@@ -131,7 +139,9 @@ public void proccessGetByYear() {
    } catch (NumberFormatException e) {
        System.out.println("Invalid selection.");
    }
+    scantron.close();
 }
+
 public void processGetByColor() {
         Scanner scantron = new Scanner(System.in);
 
@@ -140,7 +150,10 @@ public void processGetByColor() {
 
     List<Vehicle> results = dealership.getVehiclesByColor(color);
     displayVehicles(results);
+
+    scantron.close();
 }
+
 public void processGetByVehicleType() {
         Scanner scantron = new Scanner(System.in);
 
@@ -149,7 +162,10 @@ public void processGetByVehicleType() {
 
     List<Vehicle> results = dealership.getVehiclesByType(vehicleType);
     displayVehicles(results);
+
+    scantron.close();
 }
+
 public void processAddVehicleRequest() {
         Scanner scantron = new Scanner(System.in);
 
@@ -181,6 +197,8 @@ public void processAddVehicleRequest() {
     } catch (NumberFormatException e) {
         System.out.println("Invalid entry. Please try again.");
     }
+    scantron.close();
+}
 
     public void processRemoveVehicleRequest() {
         Scanner scantron = new Scanner(System.in);
@@ -189,11 +207,14 @@ public void processAddVehicleRequest() {
         try {
             int removeVehicle = Integer.parseInt(scantron.nextLine();
 
-            List
+            List<Vehicle> results = dealership.removeVehicle(removeVehicle);
+            displayVehicles(results);
 
 
         } catch (NumberFormatException e) {
             System.out.println("Invalid entry. Please try again.");
         }
+        scantron.close();
+    }
 }
-}
+

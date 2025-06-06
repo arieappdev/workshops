@@ -1,6 +1,7 @@
-package com.pluralsight;
+package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Dealership {
     private String name;
@@ -85,9 +86,10 @@ public class Dealership {
         inventory.add(vehicle);
     }
 
-    public void removeVehicle(Vehicle vehicle){
+    public List<Vehicle> removeVehicle(int vehicle){
 
         inventory.remove(vehicle);
+        return null;
     }
 
     @Override
